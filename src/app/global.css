@@ -48,6 +48,7 @@
 	--secondary-button-active: rgb(67 67 67);
 	--scondary-button-foreground: rgb(223 223 223);
 
+	--menubar-accent: rgb(20 96 179);
 	--menubar-aria-expanded: rgb(61 130 178);
 }
 
@@ -102,6 +103,7 @@
 	--color-secondary-button-active: var(--secondary-button-active);
 	--color-scondary-button-foreground: var(--scondary-button-foreground);
 
+	--color-menubar-accent: var(--menubar-accent);
 	--color-menubar-aria-expanded: var(--menubar-aria-expanded);
 }
 

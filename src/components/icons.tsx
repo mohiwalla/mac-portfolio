@@ -1,0 +1,15 @@
+export const Icons = {
+	Apple: "",
+	Command: "⌘",
+	Option: "⌥",
+	Control: "⌃",
+	Shift: "⇧",
+	Enter: "↵",
+	Backspace: "⌫",
+	Delete: "⌦",
+	Escape: "⎋",
+	Tab: "⇥",
+	Space: "␣",
+	PageUp: "⇞",
+	PageDown: "⇟"
+}

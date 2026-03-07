@@ -1,4 +1,3 @@
-import AppleIcon from "../apple-icon"
 import {
 	Menubar,
 	MenubarCheckboxItem,
@@ -13,53 +12,162 @@ import {
 	MenubarSubTrigger,
 	MenubarTrigger
 } from "@/components/ui/menubar"
+import { Icons } from "./icons"
 
 export default function MenubarNative() {
 	return (
-		<header className="flex items-center justify-between border-b py-1 text-white">
+		<header className="flex h-9 items-center justify-between py-1 text-white">
 			<div className="flex items-center">
 				<Menubar>
 					<MenubarMenu>
-						<MenubarTrigger className="ml-1 py-0.5 text-[15px]">
-							<AppleIcon />
+						<MenubarTrigger className="ml-1 py-0.5 text-xl">
+							{Icons.Apple}
 						</MenubarTrigger>
 
 						<MenubarContent>
 							<MenubarGroup>
-								<MenubarItem>
-									New Tab{" "}
-									<MenubarShortcut>⌘T</MenubarShortcut>
-								</MenubarItem>
-
-								<MenubarItem>
-									New Window{" "}
-									<MenubarShortcut>⌘N</MenubarShortcut>
-								</MenubarItem>
-
-								<MenubarItem disabled>
-									New Incognito Window
-								</MenubarItem>
+								<MenubarItem>About This Mac</MenubarItem>
 							</MenubarGroup>
+
 							<MenubarSeparator />
+
+							<MenubarGroup>
+								<MenubarItem>System Settings...</MenubarItem>
+								<MenubarItem>App Store</MenubarItem>
+							</MenubarGroup>
+
+							<MenubarSeparator />
+
 							<MenubarGroup>
 								<MenubarSub>
-									<MenubarSubTrigger>Share</MenubarSubTrigger>
+									<MenubarSubTrigger>
+										Recent Items
+									</MenubarSubTrigger>
+
 									<MenubarSubContent>
 										<MenubarGroup>
-											<MenubarItem>
-												Email link
-											</MenubarItem>
-											<MenubarItem>Messages</MenubarItem>
-											<MenubarItem>Notes</MenubarItem>
+											<MenubarItem>Safari</MenubarItem>
+											<MenubarItem>Chrome</MenubarItem>
+											<MenubarItem>Firefox</MenubarItem>
 										</MenubarGroup>
 									</MenubarSubContent>
 								</MenubarSub>
 							</MenubarGroup>
+
 							<MenubarSeparator />
+
 							<MenubarGroup>
 								<MenubarItem>
-									Print...{" "}
-									<MenubarShortcut>⌘P</MenubarShortcut>
+									Force Quit
+									<MenubarShortcut>
+										{Icons.Option}
+										{Icons.Command}Q
+									</MenubarShortcut>
+								</MenubarItem>
+							</MenubarGroup>
+
+							<MenubarSeparator />
+
+							<MenubarGroup>
+								<MenubarItem>Sleep</MenubarItem>
+								<MenubarItem>Restart...</MenubarItem>
+								<MenubarItem>Shut Down...</MenubarItem>
+							</MenubarGroup>
+
+							<MenubarSeparator />
+
+							<MenubarGroup>
+								<MenubarItem>
+									Lock Screen
+									<MenubarShortcut>
+										{Icons.Control}
+										{Icons.Command}Q
+									</MenubarShortcut>
+								</MenubarItem>
+
+								<MenubarItem>
+									Log Out mohiwalla
+									<MenubarShortcut>
+										{Icons.Shift}
+										{Icons.Command}Q
+									</MenubarShortcut>
+								</MenubarItem>
+							</MenubarGroup>
+						</MenubarContent>
+					</MenubarMenu>
+
+					<MenubarMenu>
+						<MenubarTrigger className="text-sm font-bold">
+							Safari
+						</MenubarTrigger>
+
+						<MenubarContent>
+							<MenubarGroup>
+								<MenubarItem>About This Mac</MenubarItem>
+							</MenubarGroup>
+
+							<MenubarSeparator />
+
+							<MenubarGroup>
+								<MenubarItem>System Settings...</MenubarItem>
+								<MenubarItem>App Store</MenubarItem>
+							</MenubarGroup>
+
+							<MenubarSeparator />
+
+							<MenubarGroup>
+								<MenubarSub>
+									<MenubarSubTrigger>
+										Recent Items
+									</MenubarSubTrigger>
+
+									<MenubarSubContent>
+										<MenubarGroup>
+											<MenubarItem>Safari</MenubarItem>
+											<MenubarItem>Chrome</MenubarItem>
+											<MenubarItem>Firefox</MenubarItem>
+										</MenubarGroup>
+									</MenubarSubContent>
+								</MenubarSub>
+							</MenubarGroup>
+
+							<MenubarSeparator />
+
+							<MenubarGroup>
+								<MenubarItem>
+									Force Quit
+									<MenubarShortcut>
+										{Icons.Option}
+										{Icons.Command}Q
+									</MenubarShortcut>
+								</MenubarItem>
+							</MenubarGroup>
+
+							<MenubarSeparator />
+
+							<MenubarGroup>
+								<MenubarItem>Sleep</MenubarItem>
+								<MenubarItem>Restart...</MenubarItem>
+								<MenubarItem>Shut Down...</MenubarItem>
+							</MenubarGroup>
+
+							<MenubarSeparator />
+
+							<MenubarGroup>
+								<MenubarItem>
+									Lock Screen
+									<MenubarShortcut>
+										{Icons.Control}
+										{Icons.Command}Q
+									</MenubarShortcut>
+								</MenubarItem>
+
+								<MenubarItem>
+									Log Out mohiwalla
+									<MenubarShortcut>
+										{Icons.Shift}
+										{Icons.Command}Q
+									</MenubarShortcut>
 								</MenubarItem>
 							</MenubarGroup>
 						</MenubarContent>
@@ -84,7 +192,9 @@ export default function MenubarNative() {
 									New Incognito Window
 								</MenubarItem>
 							</MenubarGroup>
+
 							<MenubarSeparator />
+
 							<MenubarGroup>
 								<MenubarSub>
 									<MenubarSubTrigger>Share</MenubarSubTrigger>
@@ -99,7 +209,9 @@ export default function MenubarNative() {
 									</MenubarSubContent>
 								</MenubarSub>
 							</MenubarGroup>
+
 							<MenubarSeparator />
+
 							<MenubarGroup>
 								<MenubarItem>
 									Print...{" "}
@@ -121,7 +233,9 @@ export default function MenubarNative() {
 									Redo <MenubarShortcut>⇧⌘Z</MenubarShortcut>
 								</MenubarItem>
 							</MenubarGroup>
+
 							<MenubarSeparator />
+
 							<MenubarGroup>
 								<MenubarSub>
 									<MenubarSubTrigger>Find</MenubarSubTrigger>
@@ -142,7 +256,9 @@ export default function MenubarNative() {
 									</MenubarSubContent>
 								</MenubarSub>
 							</MenubarGroup>
+
 							<MenubarSeparator />
+
 							<MenubarGroup>
 								<MenubarItem>Cut</MenubarItem>
 
@@ -155,7 +271,7 @@ export default function MenubarNative() {
 
 					<MenubarMenu>
 						<MenubarTrigger>View</MenubarTrigger>
-						<MenubarContent className="w-44">
+						<MenubarContent>
 							<MenubarGroup>
 								<MenubarCheckboxItem>
 									Bookmarks Bar
@@ -164,7 +280,9 @@ export default function MenubarNative() {
 									Full URLs
 								</MenubarCheckboxItem>
 							</MenubarGroup>
+
 							<MenubarSeparator />
+
 							<MenubarGroup>
 								<MenubarItem inset>
 									Reload <MenubarShortcut>⌘R</MenubarShortcut>
@@ -175,13 +293,17 @@ export default function MenubarNative() {
 									<MenubarShortcut>⇧⌘R</MenubarShortcut>
 								</MenubarItem>
 							</MenubarGroup>
+
 							<MenubarSeparator />
+
 							<MenubarGroup>
 								<MenubarItem inset>
 									Toggle Fullscreen
 								</MenubarItem>
 							</MenubarGroup>
+
 							<MenubarSeparator />
+
 							<MenubarGroup>
 								<MenubarItem inset>Hide Sidebar</MenubarItem>
 							</MenubarGroup>
