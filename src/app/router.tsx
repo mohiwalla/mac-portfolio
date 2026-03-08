@@ -7,7 +7,7 @@ import Dock from "@/components/dock"
 
 export default function Router() {
 	return (
-		<div className="flex h-screen max-h-screen min-h-screen w-screen min-w-screen flex-col bg-[url('/images/wallpapers/sequioa-2.jpeg')] bg-cover bg-no-repeat">
+		<div className="flex h-screen max-h-screen min-h-screen w-screen min-w-screen flex-col bg-[url('/images/wallpapers/sequioa.jpeg')] bg-cover bg-no-repeat">
 			<BrowserRouter>
 				<Menubar />
 
