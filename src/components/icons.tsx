@@ -11,5 +11,5 @@ export const Icons = {
 	Tab: "⇥",
 	Space: "␣",
 	PageUp: "⇞",
-	PageDown: "⇟"
+	PageDown: "⇟",
 }

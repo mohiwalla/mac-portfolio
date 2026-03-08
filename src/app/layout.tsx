@@ -7,5 +7,5 @@ import Router from "@/app/router"
 createRoot(document.getElementById("root")!).render(
 	<StrictMode>
 		<Router />
-	</StrictMode>
+	</StrictMode>,
 )

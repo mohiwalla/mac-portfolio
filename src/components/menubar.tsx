@@ -1,5 +1,6 @@
+import { Icons } from "@/components/icons"
 import {
-	Menubar,
+	Menubar as MenubarPrimitive,
 	MenubarCheckboxItem,
 	MenubarContent,
 	MenubarGroup,
@@ -10,17 +11,19 @@ import {
 	MenubarSub,
 	MenubarSubContent,
 	MenubarSubTrigger,
-	MenubarTrigger
+	MenubarTrigger,
 } from "@/components/ui/menubar"
-import { Icons } from "./icons"
+import { useSystemStore } from "@/stores/system"
 
-export default function MenubarNative() {
+export default function Menubar() {
+	const { activeApplication } = useSystemStore()
+
 	return (
-		<header className="flex h-9 items-center justify-between py-1 text-white">
+		<header className="flex h-9 items-center justify-between py-[3px] text-white">
 			<div className="flex items-center">
-				<Menubar>
+				<MenubarPrimitive>
 					<MenubarMenu>
-						<MenubarTrigger className="ml-1 py-0.5 text-xl">
+						<MenubarTrigger className="ml-1 px-3 py-0.5 text-xl">
 							{Icons.Apple}
 						</MenubarTrigger>
 
@@ -86,7 +89,7 @@ export default function MenubarNative() {
 								</MenubarItem>
 
 								<MenubarItem>
-									Log Out mohiwalla
+									Log Out mohiwalla...
 									<MenubarShortcut>
 										{Icons.Shift}
 										{Icons.Command}Q
@@ -98,76 +101,14 @@ export default function MenubarNative() {
 
 					<MenubarMenu>
 						<MenubarTrigger className="text-sm font-bold">
-							Safari
+							{activeApplication.shortName ||
+								activeApplication.name}
 						</MenubarTrigger>
 
 						<MenubarContent>
 							<MenubarGroup>
-								<MenubarItem>About This Mac</MenubarItem>
-							</MenubarGroup>
-
-							<MenubarSeparator />
-
-							<MenubarGroup>
-								<MenubarItem>System Settings...</MenubarItem>
-								<MenubarItem>App Store</MenubarItem>
-							</MenubarGroup>
-
-							<MenubarSeparator />
-
-							<MenubarGroup>
-								<MenubarSub>
-									<MenubarSubTrigger>
-										Recent Items
-									</MenubarSubTrigger>
-
-									<MenubarSubContent>
-										<MenubarGroup>
-											<MenubarItem>Safari</MenubarItem>
-											<MenubarItem>Chrome</MenubarItem>
-											<MenubarItem>Firefox</MenubarItem>
-										</MenubarGroup>
-									</MenubarSubContent>
-								</MenubarSub>
-							</MenubarGroup>
-
-							<MenubarSeparator />
-
-							<MenubarGroup>
 								<MenubarItem>
-									Force Quit
-									<MenubarShortcut>
-										{Icons.Option}
-										{Icons.Command}Q
-									</MenubarShortcut>
-								</MenubarItem>
-							</MenubarGroup>
-
-							<MenubarSeparator />
-
-							<MenubarGroup>
-								<MenubarItem>Sleep</MenubarItem>
-								<MenubarItem>Restart...</MenubarItem>
-								<MenubarItem>Shut Down...</MenubarItem>
-							</MenubarGroup>
-
-							<MenubarSeparator />
-
-							<MenubarGroup>
-								<MenubarItem>
-									Lock Screen
-									<MenubarShortcut>
-										{Icons.Control}
-										{Icons.Command}Q
-									</MenubarShortcut>
-								</MenubarItem>
-
-								<MenubarItem>
-									Log Out mohiwalla
-									<MenubarShortcut>
-										{Icons.Shift}
-										{Icons.Command}Q
-									</MenubarShortcut>
+									About {activeApplication.name}
 								</MenubarItem>
 							</MenubarGroup>
 						</MenubarContent>
@@ -309,7 +250,7 @@ export default function MenubarNative() {
 							</MenubarGroup>
 						</MenubarContent>
 					</MenubarMenu>
-				</Menubar>
+				</MenubarPrimitive>
 			</div>
 
 			<div></div>

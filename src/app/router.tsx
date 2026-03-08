@@ -2,17 +2,22 @@ import { BrowserRouter, Route, Routes } from "react-router"
 
 import HomePage from "@/app/home"
 import NotFoundPage from "@/app/not-found"
-import MenubarNative from "@/components/menubar"
+import Menubar from "@/components/menubar"
+import Dock from "@/components/dock"
 
 export default function Router() {
 	return (
-		<BrowserRouter>
-			<MenubarNative />
+		<div className="flex h-screen max-h-screen min-h-screen w-screen min-w-screen flex-col bg-[url('/images/wallpapers/sequioa-2.jpeg')] bg-cover bg-no-repeat">
+			<BrowserRouter>
+				<Menubar />
 
-			<Routes>
-				<Route path="*" element={<NotFoundPage />} />
-				<Route index path="/" element={<HomePage />} />
-			</Routes>
-		</BrowserRouter>
+				<Routes>
+					<Route path="*" element={<NotFoundPage />} />
+					<Route index path="/" element={<HomePage />} />
+				</Routes>
+
+				<Dock />
+			</BrowserRouter>
+		</div>
 	)
 }

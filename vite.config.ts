@@ -7,8 +7,8 @@ export default defineConfig({
 	plugins: [react(), tailwindcss()],
 	resolve: {
 		alias: {
-			"@": path.resolve(__dirname, "./src")
-		}
+			"@": path.resolve(__dirname, "./src"),
+		},
 	},
 	build: {
 		chunkSizeWarningLimit: 1600,
@@ -22,8 +22,8 @@ export default defineConfig({
 							.split("/")[0]
 							.toString()
 					}
-				}
-			}
-		}
-	}
+				},
+			},
+		},
+	},
 })

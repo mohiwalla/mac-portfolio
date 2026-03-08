@@ -42,6 +42,7 @@
 
 	/* User defined */
 	--primary-button: rgb(52 120 246);
+	--primary-button: rgb(0 122 255);
 	--primary-button-active: rgb(72 133 247);
 
 	--secondary-button: rgb(47 47 47);
@@ -49,6 +50,8 @@
 	--scondary-button-foreground: rgb(223 223 223);
 
 	--menubar-accent: rgb(20 96 179);
+	--menubar-accent: rgb(0 122 255);
+	--menubar-accent: rgb(16, 110, 210);
 	--menubar-aria-expanded: rgb(61 130 178);
 }
 
@@ -119,4 +122,8 @@
 	html {
 		@apply font-sans;
 	}
+}
+
+.squircle {
+	corner-shape: squircle;
 }
