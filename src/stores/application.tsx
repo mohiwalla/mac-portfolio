@@ -16,7 +16,7 @@ const openWindowInstances = [
 	{
 		id: "uuidV4",
 		application: SystemApplications.Finder,
-		children: <div className="px-3 py-2">Finder niggaa</div>,
+		children: <div className="px-3 py-2">Finder</div>,
 		position: {
 			x: 100,
 			y: 100,
@@ -28,7 +28,7 @@ const openWindowInstances = [
 	{
 		id: "uuidV5",
 		application: SystemApplications.ChatGPT,
-		children: <div className="px-3 py-2">GPT nigga</div>,
+		children: <div className="px-3 py-2">ChatGPT</div>,
 		position: {
 			x: 200,
 			y: 200,

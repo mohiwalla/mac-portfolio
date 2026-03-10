@@ -2,7 +2,6 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
-@import "@fontsource-variable/geist";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -56,8 +55,7 @@
 }
 
 @theme inline {
-	--font-sans:
-		"SF Pro Text", "SF Compact Display", "Geist Variable", sans-serif;
+	--font-sans: "SF Pro Text", "SF Compact Display", sans-serif;
 	--font-mono: "SF Mono", ui-monospace, monospace;
 	--color-sidebar-ring: var(--sidebar-ring);
 	--color-sidebar-border: var(--sidebar-border);
