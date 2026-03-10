@@ -13,6 +13,7 @@ export const SystemApplications = {
 		icon: "/icons/trash.png",
 		isOpen: false,
 		isPinned: true,
+		isInstancable: false,
 	},
 	Safari: {
 		name: "Safari",
@@ -30,6 +31,11 @@ export const SystemApplications = {
 	GoogleChrome: {
 		name: "Google Chrome",
 		icon: "/icons/google-chrome.png",
+	},
+	Settings: {
+		name: "System Settings",
+		icon: "/icons/settings.png",
+		isInstancable: false,
 	},
 	Ghostty: {
 		name: "Ghostty",

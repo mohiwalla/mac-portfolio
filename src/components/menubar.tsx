@@ -1,4 +1,4 @@
-import { Icons } from "@/components/icons"
+import { Icons } from "@/lib/icons"
 import {
 	Menubar as MenubarPrimitive,
 	MenubarCheckboxItem,
@@ -13,10 +13,10 @@ import {
 	MenubarSubTrigger,
 	MenubarTrigger,
 } from "@/components/ui/menubar"
-import { useSystemStore } from "@/stores/system"
+import { useApplicationStore } from "@/stores/application"
 
 export default function Menubar() {
-	const { activeApplication } = useSystemStore()
+	const { activeApplication } = useApplicationStore()
 
 	return (
 		<header className="flex h-9 items-center justify-between py-0.75 text-white">

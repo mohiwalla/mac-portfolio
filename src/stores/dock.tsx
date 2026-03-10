@@ -1,12 +1,12 @@
 import { create } from "zustand"
-import type { Applications } from "@/types/application"
 import { SystemApplications } from "@/lib/applications"
+import type { Application } from "@/types/application"
 
 type DockStore = {
 	height: number
 	setHeight: (height: number) => void
-	applications: Applications
-	setApplications: (applications: Applications) => void
+	applications: Application[]
+	setApplications: (applications: Application[]) => void
 }
 
 export const useDockStore = create<DockStore>(set => ({

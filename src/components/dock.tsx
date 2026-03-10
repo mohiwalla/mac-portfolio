@@ -1,7 +1,7 @@
 import { SystemApplications } from "@/lib/applications"
 import { cn } from "@/lib/utils"
 import { useDockStore } from "@/stores/dock"
-import { useSystemStore } from "@/stores/system"
+import { useApplicationStore } from "@/stores/application"
 import type { Application } from "@/types/application"
 
 export default function Dock() {
@@ -46,7 +46,7 @@ function DockApplication({
 	application: Application
 	height: number
 }) {
-	const { setActiveApplication } = useSystemStore()
+	const { setActiveApplication } = useApplicationStore()
 	const { isOpen, isPinned, name, icon } = application
 
 	if (!isOpen && !isPinned) {
@@ -64,7 +64,7 @@ function DockApplication({
 				style={{
 					height,
 				}}
-				className="aspect-square group-active:opacity-55"
+				className="aspect-square group-active:brightness-60"
 				draggable={false}
 			/>
 

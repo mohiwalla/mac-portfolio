@@ -22,8 +22,10 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { CheckIcon } from "lucide-react"
 
-const menubarContentStyles =
-	"text-popover-foreground data-[side=bottom]:slide-in-from-top-2 data-[side=inline-end]:slide-in-from-left-2 data-[side=inline-start]:slide-in-from-right-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 border-blue-200/35 rounded-xl border-[0.5px] bg-black/40 p-0.75 shadow-2xl shadow-black/50 backdrop-blur-lg duration-0 -mt-0.75 w-auto"
+const menubarContentStyles = cn(
+	"text-popover-foreground data-[side=bottom]:slide-in-from-top-2 data-[side=inline-end]:slide-in-from-left-2 data-[side=inline-start]:slide-in-from-right-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 border-blue-200/35 rounded-xl border-[0.5px] p-0.75 shadow-2xl shadow-black/50 duration-0 -mt-0.75 w-auto",
+	"bg-black/40 backdrop-blur-lg",
+)
 
 function Menubar({ className, ...props }: MenubarPrimitive.Props) {
 	return (

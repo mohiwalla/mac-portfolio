@@ -4,6 +4,6 @@ export type Application = {
 	icon: string
 	isOpen?: boolean
 	isPinned?: boolean
+	isInstancable?: boolean
+	isQuittable?: boolean
 }
-
-export type Applications = Application[]
