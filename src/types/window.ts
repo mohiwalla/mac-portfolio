@@ -1,10 +1,16 @@
 import type { Application } from "@/types/application"
 
+type Coordinate = number
+// | `${number}px`
+// | `-${number}px`
+// | `${string}%`
+// | `-${number}%`
+
 export type WindowPosition = {
-	x: number
-	y: number
-	height: number
-	width: number
+	x: Coordinate
+	y: Coordinate
+	height: Coordinate
+	width: Coordinate
 }
 
 export type WindowInstance = {

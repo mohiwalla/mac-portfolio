@@ -65,7 +65,7 @@ function DockApplication({
 			position: {
 				x: 100 * openWindowInstances.length,
 				y: 100 * openWindowInstances.length,
-				width: 200,
+				width: 220,
 				height: 150,
 			},
 			lastFocused: Date.now(),
