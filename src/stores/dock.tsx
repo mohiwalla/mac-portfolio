@@ -12,6 +12,7 @@ type DockStore = {
 export const useDockStore = create<DockStore>(set => ({
 	height: 40,
 	setHeight: height => set({ height }),
+	// TODO: dock application pins should be dynamic with localStorage
 	applications: [
 		{ ...SystemApplications.Safari, isPinned: true },
 		{ ...SystemApplications.VSCode, isPinned: true },

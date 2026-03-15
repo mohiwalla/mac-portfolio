@@ -22,3 +22,8 @@ export type WindowInstance = {
 	isMaximized?: boolean
 	lastFocused: number
 }
+
+export const MIN_WINDOW_WIDTH = 220
+export const MIN_WINDOW_HEIGHT = 150
+
+export type ResizeDirection = "n" | "s" | "e" | "w" | "ne" | "nw" | "se" | "sw"

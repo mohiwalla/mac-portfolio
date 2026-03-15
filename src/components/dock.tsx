@@ -2,6 +2,7 @@ import { SystemApplications } from "@/lib/applications"
 import { useDockStore } from "@/stores/dock"
 import { useApplicationStore } from "@/stores/application"
 import type { Application } from "@/types/application"
+import { MIN_WINDOW_HEIGHT, MIN_WINDOW_WIDTH } from "@/types/window"
 
 export default function Dock() {
 	const { applications, height } = useDockStore()
@@ -65,8 +66,8 @@ function DockApplication({
 			position: {
 				x: 100 * openWindowInstances.length,
 				y: 100 * openWindowInstances.length,
-				width: 220,
-				height: 150,
+				width: MIN_WINDOW_WIDTH,
+				height: MIN_WINDOW_HEIGHT,
 			},
 			lastFocused: Date.now(),
 		})
