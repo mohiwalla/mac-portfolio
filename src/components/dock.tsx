@@ -8,7 +8,7 @@ export default function Dock() {
 	const { applications, height } = useDockStore()
 
 	return (
-		<footer className="squircle mx-auto mb-1.5 flex rounded-full bg-black/20 px-1.5 backdrop-blur-sm">
+		<footer className="squircle z-99999 mx-auto mb-1.5 flex rounded-full bg-black/20 px-1.5 backdrop-blur-sm">
 			<DockApplication
 				application={SystemApplications.Finder}
 				height={height}
@@ -48,9 +48,11 @@ function DockApplication({
 	} = useApplicationStore()
 
 	const isOpen =
-		openWindowInstances.some(
+		(openWindowInstances.some(
 			instance => instance.application.name === application.name,
-		) || application.name === "Finder"
+		) ||
+			application.name === "Finder") &&
+		application.name !== "Trash"
 
 	function handleDockAppIconClick() {
 		const instanceID = crypto.randomUUID()
@@ -98,5 +100,9 @@ function DockApplication({
 }
 
 function DockSeparator() {
-	return <span className="mx-2 my-2 w-px bg-white/30"></span>
+	return (
+		<div className="flex px-2">
+			<div className="my-2 w-px shrink-0 bg-white/30"></div>
+		</div>
+	)
 }

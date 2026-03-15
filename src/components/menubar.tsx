@@ -19,7 +19,7 @@ export default function Menubar() {
 	const { activeApplication } = useApplicationStore()
 
 	return (
-		<header className="flex h-9 items-center justify-between py-0.75 text-white">
+		<header className="z-99999 flex h-9 items-center justify-between py-0.75 text-white">
 			<div className="flex items-center">
 				<MenubarPrimitive>
 					<MenubarMenu>
@@ -41,6 +41,7 @@ export default function Menubar() {
 
 							<MenubarSeparator />
 
+							{/* TODO: Recent items should be dynamic */}
 							<MenubarGroup>
 								<MenubarSub>
 									<MenubarSubTrigger>
@@ -98,7 +99,6 @@ export default function Menubar() {
 							</MenubarGroup>
 						</MenubarContent>
 					</MenubarMenu>
-
 					<MenubarMenu>
 						<MenubarTrigger className="text-sm font-bold">
 							{activeApplication.shortName ||
@@ -114,6 +114,7 @@ export default function Menubar() {
 						</MenubarContent>
 					</MenubarMenu>
 
+					{/* TODO: Menubar items should be dynamic per application */}
 					<MenubarMenu>
 						<MenubarTrigger>File</MenubarTrigger>
 
@@ -161,7 +162,6 @@ export default function Menubar() {
 							</MenubarGroup>
 						</MenubarContent>
 					</MenubarMenu>
-
 					<MenubarMenu>
 						<MenubarTrigger>Edit</MenubarTrigger>
 						<MenubarContent>
@@ -209,7 +209,6 @@ export default function Menubar() {
 							</MenubarGroup>
 						</MenubarContent>
 					</MenubarMenu>
-
 					<MenubarMenu>
 						<MenubarTrigger>View</MenubarTrigger>
 						<MenubarContent>
