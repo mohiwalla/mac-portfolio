@@ -1,5 +1,4 @@
 import { SystemApplications } from "@/lib/applications"
-import { cn } from "@/lib/utils"
 import { useDockStore } from "@/stores/dock"
 import { useApplicationStore } from "@/stores/application"
 import type { Application } from "@/types/application"
@@ -8,22 +7,15 @@ export default function Dock() {
 	const { applications, height } = useDockStore()
 
 	return (
-		<footer
-			className={cn(
-				"squircle mx-auto mb-1.5 flex bg-black/20 px-1.5 backdrop-blur-sm",
-				CSS.supports("corner-shape: round")
-					? "rounded-full"
-					: "rounded-4xl",
-			)}
-		>
+		<footer className="squircle mx-auto mb-1.5 flex rounded-full bg-black/20 px-1.5 backdrop-blur-sm">
 			<DockApplication
 				application={SystemApplications.Finder}
 				height={height}
 			/>
 
-			{applications.map((application, i) => (
+			{applications.map(application => (
 				<DockApplication
-					key={i}
+					key={application.name}
 					application={application}
 					height={height}
 				/>
@@ -46,18 +38,47 @@ function DockApplication({
 	application: Application
 	height: number
 }) {
-	const { setActiveApplication } = useApplicationStore()
-	const { isOpen, isPinned, name, icon } = application
+	const { name, icon } = application
+	const {
+		setActiveApplication,
+		setActiveWindowInstanceID,
+		openWindowInstances,
+		setOpenWindowInstances,
+	} = useApplicationStore()
 
-	if (!isOpen && !isPinned) {
-		return null
+	const isOpen =
+		openWindowInstances.some(
+			instance => instance.application.name === application.name,
+		) || application.name === "Finder"
+
+	function handleDockAppIconClick() {
+		const instanceID = crypto.randomUUID()
+
+		setActiveApplication(application)
+		setActiveWindowInstanceID(instanceID)
+
+		const newOpenWindowInstances = [...openWindowInstances]
+		newOpenWindowInstances.push({
+			application,
+			id: instanceID,
+			children: <div className="p-2">{application.name}</div>,
+			position: {
+				x: 100 * openWindowInstances.length,
+				y: 100 * openWindowInstances.length,
+				width: 200,
+				height: 150,
+			},
+			lastFocused: Date.now(),
+		})
+
+		setOpenWindowInstances(newOpenWindowInstances)
 	}
 
 	return (
 		<div
 			title={name}
 			className="group relative px-1.75 py-3 select-none"
-			onClick={() => setActiveApplication(application)}
+			onClick={handleDockAppIconClick}
 		>
 			<img
 				src={icon}

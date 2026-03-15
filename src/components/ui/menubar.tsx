@@ -23,7 +23,7 @@ import {
 import { CheckIcon } from "lucide-react"
 
 const menubarContentStyles = cn(
-	"text-popover-foreground data-[side=bottom]:slide-in-from-top-2 data-[side=inline-end]:slide-in-from-left-2 data-[side=inline-start]:slide-in-from-right-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 border-blue-200/35 rounded-xl border-[0.5px] p-0.75 shadow-2xl shadow-black/50 duration-0 -mt-0.75 w-auto",
+	"text-popover-foreground data-[side=bottom]:slide-in-from-top-2 data-[side=inline-end]:slide-in-from-left-2 data-[side=inline-start]:slide-in-from-right-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 border-white/25 rounded-xl border-[0.5px] p-0.75 shadow-2xl shadow-black/50 duration-0 -mt-0.75 w-auto",
 	"bg-black/40 backdrop-blur-lg",
 )
 
@@ -61,7 +61,7 @@ function MenubarTrigger({
 		<DropdownMenuTrigger
 			data-slot="menubar-trigger"
 			className={cn(
-				"-mx-1 flex h-6 items-center rounded-full px-3.75 py-1.5 text-[13px] outline-hidden select-none aria-expanded:z-10 aria-expanded:bg-blue-300/40",
+				"-mx-1 flex h-6 items-center rounded-full px-3.75 py-1.5 text-[13px] outline-hidden backdrop-blur-lg select-none aria-expanded:z-10 aria-expanded:bg-white/25",
 				className,
 			)}
 			{...props}
@@ -196,7 +196,7 @@ function MenubarSeparator({
 	return (
 		<DropdownMenuSeparator
 			data-slot="menubar-separator"
-			className={cn("bg-border mx-3 my-1 h-px", className)}
+			className={cn("mx-3 my-1 h-[0.5px] bg-white/15", className)}
 			{...props}
 		/>
 	)

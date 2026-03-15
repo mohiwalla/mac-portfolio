@@ -1,4 +1,4 @@
-import ApplicationWindow from "@/components/window"
+import ApplicationWindow from "@/components/application-window"
 import { useApplicationStore } from "@/stores/application"
 import { useEffect } from "react"
 
@@ -12,19 +12,9 @@ export default function HomeScreen() {
 
 	return (
 		<main className="relative grid flex-1">
-			{openWindowInstances.map(
-				({ id, application, position, children }, i) => (
-					<ApplicationWindow
-						key={i}
-						id={id}
-						index={i}
-						application={application}
-						position={position}
-					>
-						{children}
-					</ApplicationWindow>
-				),
-			)}
+			{openWindowInstances.map((instance, i) => (
+				<ApplicationWindow key={instance.id} index={i} {...instance} />
+			))}
 		</main>
 	)
 }

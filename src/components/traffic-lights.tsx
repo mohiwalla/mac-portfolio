@@ -1,17 +1,47 @@
 import MaximizeIcon from "@/components/icons/maximize"
+import { SystemApplications } from "@/lib/applications"
 import { cn } from "@/lib/utils"
+import { useApplicationStore } from "@/stores/application"
+import type { Application } from "@/types/application"
 import { Minus, X } from "lucide-react"
 
 export default function TrafficLights({
+	id,
 	isWindowFocused,
+	application: _,
 }: {
+	id: string
 	isWindowFocused: boolean
+	application: Application
 }) {
+	const {
+		openWindowInstances,
+		setOpenWindowInstances,
+		setActiveApplication,
+	} = useApplicationStore()
+
+	function handleApplicationClose() {
+		const newOpenWindowInstances = openWindowInstances.filter(
+			instance => instance.id !== id,
+		)
+
+		setOpenWindowInstances(newOpenWindowInstances)
+
+		const secondMostRecentActiveApplication = newOpenWindowInstances
+			.sort((a, b) => a.lastFocused - b.lastFocused)
+			.at(0)
+		setActiveApplication(
+			secondMostRecentActiveApplication?.application ||
+				SystemApplications.Finder,
+		)
+	}
+
 	return (
-		<div className="group flex items-center justify-start gap-2 px-3 py-2.75">
+		<div className="group inline-flex items-center justify-start gap-2 px-3 py-2.75">
 			<TrafficLightButton
+				onClick={handleApplicationClose}
 				className={cn(
-					"bg-[rgb(233_92_90)] group-hover:bg-[rgb(233_92_90)]",
+					"bg-[rgb(236_101_103)] group-hover:bg-[rgb(236_101_103)]",
 					!isWindowFocused && "bg-secondary-button-active",
 				)}
 			>
@@ -48,11 +78,21 @@ export default function TrafficLights({
 function TrafficLightButton({
 	className,
 	children,
+	onMouseDown,
+	onClick,
 	...props
-}: React.HTMLAttributes<HTMLButtonElement>) {
+}: React.ButtonHTMLAttributes<HTMLButtonElement>) {
 	return (
 		<button
 			tabIndex={-1}
+			onMouseDown={event => {
+				event.stopPropagation()
+				onMouseDown?.(event)
+			}}
+			onClick={event => {
+				event.stopPropagation()
+				onClick?.(event)
+			}}
 			className={cn(
 				"flex size-3.25 shrink-0 items-center justify-center rounded-full",
 				className,

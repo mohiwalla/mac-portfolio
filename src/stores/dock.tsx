@@ -17,7 +17,6 @@ export const useDockStore = create<DockStore>(set => ({
 		{ ...SystemApplications.VSCode, isPinned: true },
 		{ ...SystemApplications.Ghostty, isPinned: true },
 		{ ...SystemApplications.ChatGPT, isPinned: true },
-		{ ...SystemApplications.Preview, isPinned: true },
 	],
 	setApplications: applications => set({ applications }),
 }))

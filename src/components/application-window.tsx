@@ -43,21 +43,22 @@ export default function ApplicationWindow({
 				)
 			}}
 			className={cn(
-				"squircle absolute rounded-[32px] outline-[1px] outline-gray-700",
-				isWindowFocused && "shadow-2xl shadow-black/75",
-				isWindowFocused ? "bg-background" : "bg-secondary-button",
+				"bg-background squircle absolute rounded-[32px] border-[0.5px] border-white/15 shadow-black/75",
+				isWindowFocused ? "shadow-xl" : "shadow-2xl",
 			)}
 			style={{
 				width,
 				height,
 				top: x,
 				left: y,
-				zIndex: (index + 1) * 10,
+				zIndex: index * 0.1,
 			}}
 		>
-			{/* <div className="border-b"> */}
-			<TrafficLights isWindowFocused={isWindowFocused} />
-			{/* </div> */}
+			<TrafficLights
+				id={id}
+				application={application}
+				isWindowFocused={isWindowFocused}
+			/>
 
 			<section>{children}</section>
 		</article>
