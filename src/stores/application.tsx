@@ -4,8 +4,8 @@ import type { WindowInstance } from "@/types/window"
 import { create } from "zustand"
 
 type ApplicationStore = {
-	activeWindowInstanceID: string | null
-	setActiveWindowInstanceID: (application: string | null) => void
+	activeWindowInstanceID: string
+	setActiveWindowInstanceID: (application: string) => void
 	activeApplication: Application
 	setActiveApplication: (application: Application) => void
 	openWindowInstances: WindowInstance[]
@@ -13,8 +13,8 @@ type ApplicationStore = {
 }
 
 export const useApplicationStore = create<ApplicationStore>(set => ({
-	activeWindowInstanceID: null,
-	setActiveWindowInstanceID: (application: string | null) =>
+	activeWindowInstanceID: "system",
+	setActiveWindowInstanceID: application =>
 		set({ activeWindowInstanceID: application }),
 	activeApplication: SystemApplications.Finder,
 	setActiveApplication: (application: Application) =>

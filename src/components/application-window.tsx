@@ -4,6 +4,7 @@ import { useApplicationStore } from "@/stores/application"
 import { useGlobalStore } from "@/stores/global"
 import type { ResizeDirection, WindowInstance } from "@/types/window"
 import { MIN_WINDOW_HEIGHT, MIN_WINDOW_WIDTH } from "@/types/window"
+import { focusWindowInstance } from "@/utils/application-window"
 import { useEffect, useRef, useState } from "react"
 
 const resizeHandles: {
@@ -31,33 +32,6 @@ const resizeHandles: {
 
 function clamp(value: number, min: number, max: number) {
 	return Math.min(Math.max(value, min), max)
-}
-
-function focusWindowInstance(
-	id: WindowInstance["id"],
-	application: WindowInstance["application"],
-) {
-	const {
-		openWindowInstances,
-		setOpenWindowInstances,
-		setActiveWindowInstanceID,
-		setActiveApplication,
-	} = useApplicationStore.getState()
-
-	setActiveWindowInstanceID(id)
-	setActiveApplication(application)
-
-	setOpenWindowInstances(
-		openWindowInstances
-			.map(instance => {
-				if (instance.id !== id) {
-					return instance
-				}
-
-				return { ...instance, lastFocused: Date.now() }
-			})
-			.sort((a, b) => a.lastFocused - b.lastFocused),
-	)
 }
 
 function commitWindowPosition(

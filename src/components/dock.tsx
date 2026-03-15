@@ -3,6 +3,7 @@ import { useDockStore } from "@/stores/dock"
 import { useApplicationStore } from "@/stores/application"
 import type { Application } from "@/types/application"
 import { MIN_WINDOW_HEIGHT, MIN_WINDOW_WIDTH } from "@/types/window"
+import { focusWindowInstance } from "@/utils/application-window"
 
 export default function Dock() {
 	const { applications, height } = useDockStore()
@@ -55,6 +56,15 @@ function DockApplication({
 		application.name !== "Trash"
 
 	function handleDockAppIconClick() {
+		const existingInstance = openWindowInstances.find(
+			instance => instance.application.name === application.name,
+		)
+
+		if (existingInstance) {
+			focusWindowInstance(existingInstance.id, application)
+			return
+		}
+
 		const instanceID = crypto.randomUUID()
 
 		setActiveApplication(application)

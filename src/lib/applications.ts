@@ -4,14 +4,12 @@ export const SystemApplications = {
 	Finder: {
 		name: "Finder",
 		icon: "/icons/finder.png",
-		isOpen: true,
 		isPinned: true,
 	},
 	Trash: {
 		name: "Trash",
 		shortName: "Finder",
 		icon: "/icons/trash.png",
-		isOpen: false,
 		isPinned: true,
 		isInstancable: false,
 	},
