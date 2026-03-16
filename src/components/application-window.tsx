@@ -1,6 +1,7 @@
 import TrafficLights from "@/components/traffic-lights"
 import { cn } from "@/lib/utils"
 import { useApplicationStore } from "@/stores/application"
+import { useDockStore } from "@/stores/dock"
 import { useGlobalStore } from "@/stores/global"
 import type { ResizeDirection, WindowInstance } from "@/types/window"
 import { MIN_WINDOW_HEIGHT, MIN_WINDOW_WIDTH } from "@/types/window"
@@ -29,6 +30,12 @@ const resizeHandles: {
 	},
 	{ direction: "sw", className: "-left-1 -bottom-1 size-3 cursor-sw-resize" },
 ]
+
+const MENUBAR_HEIGHT = 0
+const WINDOW_HEADER_HEIGHT = 36
+const DRAG_BOTTOM_MAX_Y_OFFSET = 8
+const DRAG_DOCK_RESET_THRESHOLD_MULTIPLIER = 1
+const DRAG_DOCK_RESET_THRESHOLD_OFFSET = 24
 
 function clamp(value: number, min: number, max: number) {
 	return Math.min(Math.max(value, min), max)
@@ -108,7 +115,7 @@ function calculateNextPositionFromResize({
 	if (direction.includes("w")) {
 		nextLeft = clamp(
 			startPosition.x + deltaX,
-			0,
+			Number.NEGATIVE_INFINITY,
 			startRight - MIN_WINDOW_WIDTH,
 		)
 	}
@@ -116,7 +123,7 @@ function calculateNextPositionFromResize({
 	if (direction.includes("n")) {
 		nextTop = clamp(
 			startPosition.y + deltaY,
-			0,
+			MENUBAR_HEIGHT,
 			startBottom - MIN_WINDOW_HEIGHT,
 		)
 	}
@@ -127,8 +134,8 @@ function calculateNextPositionFromResize({
 	width = Math.min(width, viewportWidth)
 	height = Math.min(height, viewportHeight)
 
-	const x = clamp(nextLeft, 0, Math.max(0, viewportWidth - width))
-	const y = clamp(nextTop, 0, Math.max(0, viewportHeight - height))
+	const x = nextLeft
+	const y = nextTop
 
 	return { x, y, width, height }
 }
@@ -145,6 +152,7 @@ export default function ApplicationWindow({
 	const activeWindowInstanceID = useApplicationStore(
 		state => state.activeWindowInstanceID,
 	)
+	const dockHeight = useDockStore(state => state.height)
 
 	const [localPosition, setLocalPosition] = useState(position)
 	const localPositionRef = useRef(position)
@@ -177,14 +185,46 @@ export default function ApplicationWindow({
 		const startPosition = localPositionRef.current
 
 		function handleWindowDrag(moveEvent: MouseEvent) {
+			const maxY =
+				Math.max(
+					MENUBAR_HEIGHT,
+					window.innerHeight - WINDOW_HEADER_HEIGHT,
+				) - DRAG_BOTTOM_MAX_Y_OFFSET
+
 			updateLocalPosition({
 				...startPosition,
 				x: startPosition.x + (moveEvent.clientX - startMouseX),
-				y: startPosition.y + (moveEvent.clientY - startMouseY),
+				y: clamp(
+					startPosition.y + (moveEvent.clientY - startMouseY),
+					MENUBAR_HEIGHT,
+					maxY,
+				),
 			})
 		}
 
 		function stopDragging() {
+			const dockLimitTop = Math.max(
+				MENUBAR_HEIGHT,
+				window.innerHeight - WINDOW_HEADER_HEIGHT - dockHeight,
+			)
+
+			const resetTop =
+				dockLimitTop -
+				dockHeight * DRAG_DOCK_RESET_THRESHOLD_MULTIPLIER -
+				DRAG_DOCK_RESET_THRESHOLD_OFFSET
+
+			const resetThresholdY =
+				dockLimitTop -
+				dockHeight * DRAG_DOCK_RESET_THRESHOLD_MULTIPLIER -
+				DRAG_DOCK_RESET_THRESHOLD_OFFSET
+
+			if (localPositionRef.current.y > resetThresholdY) {
+				updateLocalPosition({
+					...localPositionRef.current,
+					y: resetTop,
+				})
+			}
+
 			isInteractingRef.current = false
 			window.removeEventListener("mousemove", handleWindowDrag)
 			window.removeEventListener("mouseup", stopDragging)
