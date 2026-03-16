@@ -1,15 +1,1 @@
 #!/usr/bin/env bash
-
-staged_files="$(git diff --cached --name-only --diff-filter=ACMR)"
-
-[ -z "$staged_files" ] && exit 0
-
-echo "$staged_files" | while IFS= read -r file; do
-	case "$file" in
-		*.js|*.jsx|*.mjs|*.cjs|*.ts|*.tsx|*.json)
-			bunx prettier --write "$file"
-			git add "$file"
-			;;
-	esac
-done
-

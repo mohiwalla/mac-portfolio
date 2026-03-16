@@ -13,7 +13,7 @@ export default function Router() {
 	useEffect(() => {
 		window.onfocus = () => setMacFocused(true)
 		window.onblur = () => setMacFocused(false)
-	}, [])
+	}, [setMacFocused])
 
 	return (
 		<div className="flex h-screen max-h-screen min-h-screen w-screen min-w-screen flex-col overflow-hidden bg-[url('/images/wallpapers/sequioa.jpeg')] bg-cover bg-no-repeat">

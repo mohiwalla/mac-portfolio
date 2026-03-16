@@ -1,17 +1,14 @@
 import { cn } from "@/lib/utils"
 import MaximizeIcon from "@/components/icons/maximize"
-import type { Application } from "@/types/application"
 import { handleApplicationClose } from "@/utils/application-window"
 import { Minus, X } from "lucide-react"
 
 export default function TrafficLights({
 	id,
 	isWindowFocused,
-	application: _,
 }: {
 	id: string
 	isWindowFocused: boolean
-	application: Application
 }) {
 	return (
 		<div className="group inline-flex items-center justify-start gap-2 px-3 py-2.75">

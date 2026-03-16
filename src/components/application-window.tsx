@@ -6,7 +6,7 @@ import { useGlobalStore } from "@/stores/global"
 import type { ResizeDirection, WindowInstance } from "@/types/window"
 import { MIN_WINDOW_HEIGHT, MIN_WINDOW_WIDTH } from "@/types/window"
 import { focusWindowInstance } from "@/utils/application-window"
-import { useEffect, useRef, useState } from "react"
+import { useRef, useState } from "react"
 
 const resizeHandles: {
 	direction: ResizeDirection
@@ -156,17 +156,11 @@ export default function ApplicationWindow({
 
 	const [localPosition, setLocalPosition] = useState(position)
 	const localPositionRef = useRef(position)
-	const isInteractingRef = useRef(false)
-	const { x, y, width, height } = localPosition
+	const [isInteracting, setIsInteracting] = useState(false)
+	const positionToRender = isInteracting ? localPosition : position
+	const { x, y, width, height } = positionToRender
 
 	const isWindowFocused = macFocused && activeWindowInstanceID === id
-
-	useEffect(() => {
-		if (!isInteractingRef.current) {
-			localPositionRef.current = position
-			setLocalPosition(position)
-		}
-	}, [position])
 
 	function updateLocalPosition(nextPosition: WindowInstance["position"]) {
 		localPositionRef.current = nextPosition
@@ -178,11 +172,12 @@ export default function ApplicationWindow({
 		e.stopPropagation()
 
 		focusWindowInstance(id, application)
-		isInteractingRef.current = true
+		setIsInteracting(true)
 
 		const startMouseX = e.clientX
 		const startMouseY = e.clientY
-		const startPosition = localPositionRef.current
+		const startPosition = position
+		localPositionRef.current = startPosition
 
 		function handleWindowDrag(moveEvent: MouseEvent) {
 			const maxY =
@@ -225,7 +220,7 @@ export default function ApplicationWindow({
 				})
 			}
 
-			isInteractingRef.current = false
+			setIsInteracting(false)
 			window.removeEventListener("mousemove", handleWindowDrag)
 			window.removeEventListener("mouseup", stopDragging)
 			commitWindowPosition(id, localPositionRef.current)
@@ -243,11 +238,12 @@ export default function ApplicationWindow({
 		e.stopPropagation()
 
 		focusWindowInstance(id, application)
-		isInteractingRef.current = true
+		setIsInteracting(true)
 
 		const startMouseX = e.clientX
 		const startMouseY = e.clientY
-		const startPosition = localPositionRef.current
+		const startPosition = position
+		localPositionRef.current = startPosition
 
 		function handleResizeWindow(moveEvent: MouseEvent) {
 			const deltaX = moveEvent.clientX - startMouseX
@@ -264,7 +260,7 @@ export default function ApplicationWindow({
 		}
 
 		function stopResizing() {
-			isInteractingRef.current = false
+			setIsInteracting(false)
 			window.removeEventListener("mousemove", handleResizeWindow)
 			window.removeEventListener("mouseup", stopResizing)
 			commitWindowPosition(id, localPositionRef.current)
@@ -317,7 +313,6 @@ export default function ApplicationWindow({
 
 function ApplicationWindowHeader({
 	id,
-	application,
 	isWindowFocused,
 	onDragStart,
 }: {
@@ -340,11 +335,7 @@ function ApplicationWindowHeader({
 			// 	})
 			// }}
 		>
-			<TrafficLights
-				id={id}
-				application={application}
-				isWindowFocused={isWindowFocused}
-			/>
+			<TrafficLights id={id} isWindowFocused={isWindowFocused} />
 		</header>
 	)
 }
