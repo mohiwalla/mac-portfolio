@@ -9,26 +9,28 @@ export default function Dock() {
 	const { applications, height } = useDockStore()
 
 	return (
-		<footer className="squircle z-99999 mx-auto mb-1.5 flex rounded-full bg-black/20 px-1.5 backdrop-blur-sm">
-			<DockApplication
-				application={SystemApplications.Finder}
-				height={height}
-			/>
-
-			{applications.map(application => (
+		<footer className="pointer-events-none flex justify-center">
+			<div className="squircle pointer-events-auto z-99999 mx-auto mb-1.5 flex rounded-full bg-black/20 px-1.5 backdrop-blur-sm">
 				<DockApplication
-					key={application.name}
-					application={application}
+					application={SystemApplications.Finder}
 					height={height}
 				/>
-			))}
 
-			<DockSeparator />
+				{applications.map(application => (
+					<DockApplication
+						key={application.name}
+						application={application}
+						height={height}
+					/>
+				))}
 
-			<DockApplication
-				application={SystemApplications.Trash}
-				height={height}
-			/>
+				<DockSeparator />
+
+				<DockApplication
+					application={SystemApplications.Trash}
+					height={height}
+				/>
+			</div>
 		</footer>
 	)
 }

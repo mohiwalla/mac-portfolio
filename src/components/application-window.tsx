@@ -1,5 +1,5 @@
 import TrafficLights from "@/components/traffic-lights"
-import { cn } from "@/lib/utils"
+import { clamp, cn } from "@/lib/utils"
 import { useApplicationStore } from "@/stores/application"
 import { useDockStore } from "@/stores/dock"
 import { useGlobalStore } from "@/stores/global"
@@ -36,10 +36,6 @@ const WINDOW_HEADER_HEIGHT = 36
 const DRAG_BOTTOM_MAX_Y_OFFSET = 8
 const DRAG_DOCK_RESET_THRESHOLD_MULTIPLIER = 1
 const DRAG_DOCK_RESET_THRESHOLD_OFFSET = 24
-
-function clamp(value: number, min: number, max: number) {
-	return Math.min(Math.max(value, min), max)
-}
 
 function commitWindowPosition(
 	id: WindowInstance["id"],
@@ -284,7 +280,7 @@ export default function ApplicationWindow({
 				height,
 				top: y,
 				left: x,
-				zIndex: index * 0.1,
+				zIndex: (index + 1) * 1,
 			}}
 		>
 			<ApplicationWindowHeader

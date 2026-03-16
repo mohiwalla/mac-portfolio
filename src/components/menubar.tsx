@@ -19,7 +19,7 @@ export default function Menubar() {
 	const { activeApplication } = useApplicationStore()
 
 	return (
-		<header className="z-99999 -mb-0.5 flex h-9 items-center justify-between py-0.75 text-white">
+		<header className="z-1 -mb-0.5 flex h-9 items-center justify-between py-0.75 text-white">
 			<div className="flex items-center">
 				<MenubarPrimitive>
 					<MenubarMenu>

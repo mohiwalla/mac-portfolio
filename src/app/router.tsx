@@ -1,11 +1,8 @@
+import { useEffect } from "react"
 import { BrowserRouter, Route, Routes } from "react-router"
 
-import Menubar from "@/components/menubar"
-import Dock from "@/components/dock"
-
-import HomeScreen from "@/app/screens/home"
 import { useGlobalStore } from "@/stores/global"
-import { useEffect } from "react"
+import HomeScreen from "@/app/screens/home"
 
 export default function Router() {
 	const { setMacFocused } = useGlobalStore()
@@ -16,16 +13,10 @@ export default function Router() {
 	}, [setMacFocused])
 
 	return (
-		<div className="flex h-screen max-h-screen min-h-screen w-screen min-w-screen flex-col overflow-hidden bg-[url('/images/wallpapers/sequioa.jpeg')] bg-cover bg-no-repeat">
-			<BrowserRouter>
-				<Menubar />
-
-				<Routes>
-					<Route index path="/" element={<HomeScreen />} />
-				</Routes>
-
-				<Dock />
-			</BrowserRouter>
-		</div>
+		<BrowserRouter>
+			<Routes>
+				<Route index path="/" element={<HomeScreen />} />
+			</Routes>
+		</BrowserRouter>
 	)
 }
